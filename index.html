@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		
+		<title>Javascript Tutrials</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/prism.css">
+		 <script src="assets/js/script.js"></script>
+	</head>
+	<body>
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<h1 class="text-center mt-5 text-grey">Welcome to Jquery</h1>
+					</div>
+					<div class="col-md-9">
+						<div class="card mt-5 mb-4" id="first">
+							<div class="card-header">
+								<h4 class="pl-3 pt-5">1-Code on HTML</h4>
+							</div>
+							<div class="card-body">
+								<h4 id="title" class="pt-5 pl-5"></h4>
+								<p>  </p>
+								<div id="content"></div>
+							</div>
+						</div>
+						
+						<div class="card mt-5 mb-4" id="second">
+							<div class="card-header">
+								<h4  class="pl-3 pt-5">1-ajax</h4>
+							</div>
+							<div class="card-body">
+								
+								
+								<div class="card mt-4 bg-white">
+									<h5 class="pl-3 pt-5">ajax-utils</h5>
+									<div class="card-body">
+										<pre>
+											<code class="language-javascript">
+											(function (global) {
+											// Set up a namespace for our utility
+											var ajaxUtils = {};
+											// Returns an HTTP request object
+											function getRequestObject() {
+											  if (global.XMLHttpRequest) {
+											    return (new XMLHttpRequest());
+											  } 
+											  else if (global.ActiveXObject) {
+											    // For very old IE browsers (optional)
+											    return (new ActiveXObject("Microsoft.XMLHTTP"));
+											  } 
+											  else {
+											    global.alert("Ajax is not supported!");
+											    return(null); 
+											  }
+											}
+											// Makes an Ajax GET request to 'requestUrl'
+											ajaxUtils.sendGetRequest = 
+											  function(requestUrl, responseHandler) {
+											    var request = getRequestObject();
+											    request.onreadystatechange = 
+											      function() { 
+											        handleResponse(request, responseHandler); 
+											      };
+											    request.open("GET", requestUrl, true);
+											    request.send(null); // for POST only
+											  };
+											// Only calls user provided 'responseHandler'
+											// function if response is ready
+											// and not an error
+											function handleResponse(request,
+											                        responseHandler) {
+											  if ((request.readyState == 4) &&
+											     (request.status == 200)) {
+											    responseHandler(request);
+											  }
+											}
+											// Expose utility to the global object
+											global.$ajaxUtils = ajaxUtils;
+											})(window);
+											</code>
+										</pre>
+									</div>
+								</div>
+								<div class="card mt-4 bg-white">
+									<h5 class="pl-3 pt-5">Scripts</h5>
+									<div class="card-body">
+										<pre>
+											<code class="language-javascript">
+											 // Event handling
+											document.addEventListener("DOMContentLoaded",
+											  function (event) {
+											    
+											    // Unobtrusive event binding
+											    document.querySelector("button")
+											      .addEventListener("click", function () {
+											        
+											        // Call server to get the name
+											        $ajaxUtils
+											          .sendGetRequest("assets/data/name.txt", 
+											            function (request) {
+											              var name = request.responseText;
+											              document.querySelector("#content")
+											                .innerHTML = "<h2>Hello " + name + "!</h2>";
+											            });
+											        
+											      });
+											  }
+											);
+											</code>
+										</pre>
+									</div>
+								</div>
+								<div class="card mt-4 bg-white">
+									<h5 class="pl-3 pt-5">Data</h5>
+									<div class="card-body">
+										<pre>
+											<code class="language-javascript">
+											 Muhammad khawar	
+											</code>
+										</pre>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<ul class="list-group mt-5">
+							<li class="list-group-item"><a href="#first">1-Code on HTML</a> </li>
+							<li class="list-group-item"><a href="#two">2-Script</a> </li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<script src="assets/js/prism.js"></script>
+		<script src="assets/js/ajax-utils.js"></script>
+		
+	</body>
+</html>
